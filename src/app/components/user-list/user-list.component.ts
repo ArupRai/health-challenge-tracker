@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { UserService } from '../services/user.service';
-import { User, Workout } from '../models/user.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-user-list',
@@ -20,11 +20,6 @@ export class UserListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  // Form data for adding users
-  name: string = '';
-  workoutType: string = '';
-  workoutMinutes: number = 0;
-
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -38,6 +33,7 @@ export class UserListComponent implements OnInit {
   handlePageChange(event: PageEvent) {
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
+    this.filterUsers(); // Reapply filtering when the page changes
   }
 
   filterUsers() {
@@ -52,19 +48,5 @@ export class UserListComponent implements OnInit {
   get paginatedData() {
     const startIndex = this.pageIndex * this.pageSize;
     return this.filteredUsers.slice(startIndex, startIndex + this.pageSize);
-  }
-
-  addUser() {
-    const newUser: User = {
-      id: 0, // Will be assigned by the service
-      name: this.name,
-      workouts: [{ type: this.workoutType, minutes: this.workoutMinutes }]
-    };
-
-    this.userService.addUser(newUser);
-    // Clear form fields after successful addition
-    this.name = '';
-    this.workoutType = '';
-    this.workoutMinutes = 0;
   }
 }

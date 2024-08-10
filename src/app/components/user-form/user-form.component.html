@@ -5,5 +5,19 @@
     <div *ngIf="userForm.controls['name'].errors?.['required']">Name is required</div>
     <div *ngIf="userForm.controls['name'].errors?.['minlength']">Name must be at least 3 characters</div>
   </div>
+
+  <label for="workoutType">Workout Type:</label>
+  <input type="text" id="workoutType" name="workoutType" [(ngModel)]="workoutType" required>
+  <div *ngIf="userForm.controls['workoutType'].invalid && (userForm.controls['workoutType'].dirty || userForm.controls['workoutType'].touched)">
+    <div *ngIf="userForm.controls['workoutType'].errors?.['required']">Workout Type is required</div>
+  </div>
+
+  <label for="workoutMinutes">Workout Duration (Minutes):</label>
+  <input type="number" id="workoutMinutes" name="workoutMinutes" [(ngModel)]="workoutMinutes" required min="1">
+  <div *ngIf="userForm.controls['workoutMinutes'].invalid && (userForm.controls['workoutMinutes'].dirty || userForm.controls['workoutMinutes'].touched)">
+    <div *ngIf="userForm.controls['workoutMinutes'].errors?.['required']">Workout duration is required</div>
+    <div *ngIf="userForm.controls['workoutMinutes'].errors?.['min']">Workout duration must be at least 1 minute</div>
+  </div>
+
   <button type="submit" [disabled]="userForm.invalid">Add User</button>
 </form>

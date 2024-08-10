@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { User, Workout } from '../models/user.model';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-user-form',
@@ -14,8 +14,7 @@ export class UserFormComponent implements OnInit {
 
   constructor(private userService: UserService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   addUser() {
     const newUser: User = {
@@ -25,6 +24,7 @@ export class UserFormComponent implements OnInit {
     };
 
     this.userService.addUser(newUser);
+
     // Clear form fields after successful addition
     this.name = '';
     this.workoutType = '';
