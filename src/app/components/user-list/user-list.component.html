@@ -1,0 +1,7 @@
+<table mat-table [dataSource]="paginatedData">
+</table>
+
+<mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
+              (page)="handlePageChange($event)">
+</mat-paginator>
+

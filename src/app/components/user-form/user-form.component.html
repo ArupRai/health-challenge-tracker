@@ -1,0 +1,9 @@
+<form (ngSubmit)="addUser()" #userForm="ngForm">
+  <label for="name">Name:</label>
+  <input type="text" id="name" name="name" [(ngModel)]="name" required minlength="3">
+  <div *ngIf="userForm.controls['name'].invalid && (userForm.controls['name'].dirty || userForm.controls['name'].touched)">
+    <div *ngIf="userForm.controls['name'].errors?.['required']">Name is required</div>
+    <div *ngIf="userForm.controls['name'].errors?.['minlength']">Name must be at least 3 characters</div>
+  </div>
+  <button type="submit" [disabled]="userForm.invalid">Add User</button>
+</form>
